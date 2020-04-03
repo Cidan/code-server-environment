@@ -21,7 +21,9 @@ docker build -t code-server-container .
 and then run it:
 
 ```bash
-docker run --name code-server --hostname code -e USERNAME=${USER} -e PUID=$(id -u) -e PGIG=$(id -g) -p 8080:8080 -v $HOME:/home/${USER} -v /var/run/docker.sock:/var/run/docker.sock -d -t code-server-container
+docker run --name code-server --hostname code -e USERNAME=${USER} \
+-e PUID=$(id -u) -e PGID=$(id -g) -p 8080:8080 -v $HOME:/home/${USER} \ 
+-v /var/run/docker.sock:/var/run/docker.sock -d -t code-server-container
 ```
 
 Then point your browser to `http://localhost:8080` and you're all set!
