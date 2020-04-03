@@ -66,11 +66,11 @@ RUN echo \
 '#!/bin/bash \n\
 addgroup --quiet --gid ${PGID} ${USERNAME} \n\
 adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell /usr/bin/fish ${USERNAME} \n\
+adduser --quiet ${USERNAME} docker \n\
 mkdir -p /code-server \n\
 chown ${PUID}:${PGID} /code-server \n\
 su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-ssh --auth none --host 0.0.0.0 --user-data-dir /code-server/.config" \
 ' > /start.sh && chmod +x /start.sh
 
 EXPOSE 8080
-VOLUME ["/code-server"]
 ENTRYPOINT [ "/start.sh" ]
