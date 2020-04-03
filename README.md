@@ -4,10 +4,10 @@ A fully integrated [code server](https://github.com/cdr/code-server) container.
 
 ## Why?
 
-Code server is an incredibly useful project for running and managing a full VS Code IDE with no client to install other than a web browser. The entire IDE runs remotely, however for language completion, compiling, tests to work, languages must be installed and managed remotely as well. This container aims to solve three things:
+Code server is an incredibly useful project for running and managing a full VS Code IDE with no client to install other than a web browser. The entire IDE runs remotely, however in order for language completion, compiling, and tests to work, languages must be installed and managed remotely as well. This container aims to solve three things:
 
 * Setting up code-server
-* Setting up installs for most popular languages
+* Setting up installs for the most popular languages
 * Setting up persistant volumes for VSCode settings and code storage
 
 ## Usage
