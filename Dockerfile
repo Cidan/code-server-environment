@@ -67,7 +67,7 @@ RUN echo \
 addgroup --quiet --gid ${PGID} ${USERNAME} \n\
 adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell /usr/bin/fish ${USERNAME} \n\
 adduser --quiet ${USERNAME} docker \n\
-su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-ssh --auth none --host 0.0.0.0 --user-data-dir /home/${USERNAME}/.config" \
+su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-ssh --auth none --host 0.0.0.0" \
 ' > /start.sh && chmod +x /start.sh
 
 EXPOSE 8080
