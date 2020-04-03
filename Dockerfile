@@ -21,7 +21,7 @@ echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Deb
 wget -nv https://download.opensuse.org/repositories/shells:fish:release:3/Debian_10/Release.key -O Release.key && \
 apt-key add - < Release.key && \
 apt-get update && apt-get install -y \
-docker-ce docker-ce-cli containerd.io fish && \
+docker-ce docker-ce-cli containerd.io fish python3-pip && \
 rm -rf /var/cache/apt/archives/*
 
 ### Define your language versions here, or pass them in to build
