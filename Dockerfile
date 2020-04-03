@@ -1,5 +1,9 @@
 FROM debian:10.3-slim
 
+ENV USERNAME=code
+ENV PUID=2000
+ENV PGID=2000
+
 ### Note: Language versions defined a bit below, so we don't have
 ### to regenerate this first run step.
 
@@ -29,6 +33,7 @@ rm -rf /var/cache/apt/archives/*
 
 ARG NODE_VERSION=12.16.1
 ARG GO_VERSION=1.14.1
+ARG CODE_SERVER_VERSION=3.0.2
 
 WORKDIR /tmp
 
@@ -46,3 +51,26 @@ https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
 tar -xvzf go.tar.gz && mv go /usr/local/go && \
 ln -s /usr/local/go/bin/go /usr/local/bin/go && \
 rm -rf /tmp/go.tar.gz
+
+# Install Code Server
+RUN wget -O /tmp/code-server.tar.gz \
+https://github.com/cdr/code-server/releases/download/${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-linux-x86_64.tar.gz && \
+tar -xvzf code-server.tar.gz && mv /tmp/code-server-${CODE_SERVER_VERSION}-linux-x86_64 /usr/local/code-server && \
+rm /usr/local/code-server/node /tmp/code-server.tar.gz && echo \
+'#!/bin/bash \n\
+/usr/local/bin/node /usr/local/code-server/out/node/entry.js $@' > /usr/local/bin/code-server && \
+chmod +x /usr/local/bin/code-server
+
+# Setup our init
+RUN echo \
+'#!/bin/bash \n\
+addgroup --quiet --gid ${PGID} ${USERNAME} \n\
+adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell /usr/bin/fish ${USERNAME} \n\
+mkdir -p /code-server \n\
+chown ${PUID}:${PGID} /code-server \n\
+su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-ssh --auth none --host 0.0.0.0 --user-data-dir /code-server" \
+' > /start.sh && chmod +x /start.sh
+
+EXPOSE 8080
+VOLUME ["/code-server"]
+ENTRYPOINT [ "/start.sh" ]
