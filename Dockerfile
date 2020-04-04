@@ -36,6 +36,7 @@ ARG GO_VERSION=1.14.1
 ARG ERLANG_VERSION=22.3-1
 ARG ELIXIR_VERSION=1.10.2-1
 ARG JAVA_VERSION=14
+ARG RUST_VERSION=1.42.0
 ARG CODE_SERVER_VERSION=3.0.2
 
 WORKDIR /tmp
@@ -90,6 +91,14 @@ RUN wget -q -O /tmp/java.tar.gz \
    tar -xzf java.tar.gz && mv /tmp/jdk-${JAVA_VERSION} /usr/local/java && \
    ln -s /usr/local/java/bin/* /usr/local/bin/ && \
    rm /tmp/java.tar.gz
+
+# Install Rust
+RUN wget -q -O /tmp/rust.tar.gz \
+   https://static.rust-lang.org/dist/rust-${RUST_VERSION}-x86_64-unknown-linux-gnu.tar.gz && \
+   tar -xzf rust.tar.gz && \
+   mv rust-${RUST_VERSION}-x86_64-unknown-linux-gnu /usr/local/rust && \
+   ln -s /usr/local/rust/*/bin/* /usr/local/bin/ && \
+   rm /tmp/rust.tar.gz
 
 # Install python3 libraries
 RUN pip3 install --system \

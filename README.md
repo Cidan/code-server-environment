@@ -38,6 +38,7 @@ As of right now, the following languages are supported:
 * NodeJS 12
 * Go 1.14
 * Python 3.7
+* Rust 1.42.0 
 * Erlang 22.3
 * Elixir 1.10
 
