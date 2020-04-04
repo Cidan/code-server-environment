@@ -34,6 +34,7 @@ As of right now, the following languages are supported:
 
 * C
 * C++
+* Java
 * NodeJS
 * Go
 * Erlang
