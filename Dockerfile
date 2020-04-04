@@ -35,14 +35,15 @@ ARG NODE_VERSION=12.16.1
 ARG GO_VERSION=1.14.1
 ARG ERLANG_VERSION=22.3-1
 ARG ELIXIR_VERSION=1.10.2-1
+ARG JAVA_VERSION=14
 ARG CODE_SERVER_VERSION=3.0.2
 
 WORKDIR /tmp
 
 # Install Code Server
-RUN wget -O /tmp/code-server.tar.gz \
+RUN wget -q -O /tmp/code-server.tar.gz \
 https://github.com/cdr/code-server/releases/download/${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-linux-x86_64.tar.gz && \
-tar -xvzf code-server.tar.gz && mv /tmp/code-server-${CODE_SERVER_VERSION}-linux-x86_64 /usr/local/code-server && \
+tar -xzf code-server.tar.gz && mv /tmp/code-server-${CODE_SERVER_VERSION}-linux-x86_64 /usr/local/code-server && \
 rm /usr/local/code-server/node /tmp/code-server.tar.gz && echo \
 '#!/bin/bash \n\
 /usr/local/bin/node /usr/local/code-server/out/node/entry.js $@' > /usr/local/bin/code-server && \
@@ -58,35 +59,37 @@ su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-ss
 ' > /start.sh && chmod +x /start.sh
 
 # Install node
-RUN wget -O /tmp/node.tar.gz \
+RUN wget -q -O /tmp/node.tar.gz \
 https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz && \
-tar -xvzf node.tar.gz && mv node-v${NODE_VERSION}-linux-x64 /usr/local/node && \
-ln -s /usr/local/node/bin/node /usr/local/bin/node && \
-ln -s /usr/local/node/bin/npm /usr/local/bin/npm && \
+tar -xzf node.tar.gz && mv node-v${NODE_VERSION}-linux-x64 /usr/local/node && \
+ln -s /usr/local/node/bin/* /usr/local/bin/ && \
 rm -rf /tmp/node.tar.gz
 
 # Install Go
-RUN wget -O /tmp/go.tar.gz \
+RUN wget -q -O /tmp/go.tar.gz \
 https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
-tar -xvzf go.tar.gz && mv go /usr/local/go && \
-ln -s /usr/local/go/bin/go /usr/local/bin/go && \
+tar -xzf go.tar.gz && mv go /usr/local/go && \
+ln -s /usr/local/go/bin/* /usr/local/bin/ && \
 rm -rf /tmp/go.tar.gz
 
 # Install Erlang
-RUN wget -O /tmp/erlang.deb \
+RUN wget -q -O /tmp/erlang.deb \
 https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_${ERLANG_VERSION}~debian~buster_amd64.deb && \
 dpkg -i /tmp/erlang.deb || apt-get -y install -f && \
 rm /tmp/erlang.deb
 
 # Install Elixir
-RUN wget -O /tmp/elixir.deb \
+RUN wget -q -O /tmp/elixir.deb \
 https://packages.erlang-solutions.com/erlang/debian/pool/elixir_${ELIXIR_VERSION}~debian~buster_all.deb && \
 dpkg -i /tmp/elixir.deb || apt-get -y install -f && \
 rm /tmp/elixir.deb
 
 # Install Java
-# RUN wget -O /tmp/java.tar.gz \
-# https://download.java.net/java/GA/jdk14/076bab302c7b4508975440c56f6cc26a/36/GPL/openjdk-14_linux-x64_bin.tar.gz
+RUN wget -q -O /tmp/java.tar.gz \
+https://download.java.net/java/GA/jdk14/076bab302c7b4508975440c56f6cc26a/36/GPL/openjdk-${JAVA_VERSION}_linux-x64_bin.tar.gz && \
+tar -xzf java.tar.gz && mv /tmp/jdk-${JAVA_VERSION} /usr/local/java && \
+ln -s /usr/local/java/bin/* /usr/local/bin/ && \
+rm /tmp/java.tar.gz
 
 EXPOSE 8080
 ENTRYPOINT [ "/start.sh" ]
