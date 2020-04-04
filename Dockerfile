@@ -76,13 +76,13 @@ RUN wget -q -O /tmp/go.tar.gz \
 RUN wget -q -O /tmp/erlang.deb \
    https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_${ERLANG_VERSION}~debian~buster_amd64.deb && \
    dpkg -i /tmp/erlang.deb || apt-get -y install -f && \
-   rm /tmp/erlang.deb
+   rm -rf /tmp/erlang.deb /var/cache/apt/archives/*
 
 # Install Elixir
 RUN wget -q -O /tmp/elixir.deb \
    https://packages.erlang-solutions.com/erlang/debian/pool/elixir_${ELIXIR_VERSION}~debian~buster_all.deb && \
    dpkg -i /tmp/elixir.deb || apt-get -y install -f && \
-   rm /tmp/elixir.deb
+   rm -rf /tmp/elixir.deb /var/cache/apt/archives/*
 
 # Install Java
 RUN wget -q -O /tmp/java.tar.gz \
@@ -90,6 +90,10 @@ RUN wget -q -O /tmp/java.tar.gz \
    tar -xzf java.tar.gz && mv /tmp/jdk-${JAVA_VERSION} /usr/local/java && \
    ln -s /usr/local/java/bin/* /usr/local/bin/ && \
    rm /tmp/java.tar.gz
+
+# Install python3 libraries
+RUN pip3 install --system \
+   autopep8==1.5
 
 EXPOSE 8080
 ENTRYPOINT [ "/start.sh" ]
