@@ -34,11 +34,12 @@ As of right now, the following languages are supported:
 
 * C
 * C++
-* Java
-* NodeJS
-* Go
-* Erlang
-* Elixir
+* Java 14
+* NodeJS 12
+* Go 1.14
+* Python 3.7
+* Erlang 22.3
+* Elixir 1.10
 
 Language versions can be set at build time via the `--build-arg` docker argument. For example:
 
