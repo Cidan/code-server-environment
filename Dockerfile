@@ -91,9 +91,5 @@ RUN wget -q -O /tmp/java.tar.gz \
    ln -s /usr/local/java/bin/* /usr/local/bin/ && \
    rm /tmp/java.tar.gz
 
-# Install python3 libraries
-RUN pip3 install \
-   autopep8==1.5
-
 EXPOSE 8080
 ENTRYPOINT [ "/start.sh" ]
