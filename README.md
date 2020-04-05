@@ -58,6 +58,7 @@ As of right now, the following languages are supported:
 * Rust 1.42.0 
 * Erlang 22.3
 * Elixir 1.10
+* COBOL 2.2
 
 Language versions can be set at build time via the `--build-arg` docker argument. For example:
 
