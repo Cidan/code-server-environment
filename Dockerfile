@@ -3,6 +3,7 @@ FROM debian:10.3-slim
 ENV USERNAME=code
 ENV PUID=2000
 ENV PGID=2000
+ENV USERSHELL=/usr/bin/fish
 
 ### Note: Language versions defined a bit below, so we don't have
 ### to regenerate this first run step.
@@ -54,7 +55,7 @@ RUN wget -q -O /tmp/code-server.tar.gz \
 RUN echo \
    '#!/bin/bash \n\
    addgroup --quiet --gid ${PGID} ${USERNAME} \n\
-   adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell /usr/bin/fish ${USERNAME} \n\
+   adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell ${USERSHELL} ${USERNAME} \n\
    adduser --quiet ${USERNAME} docker \n\
    su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-ssh --auth none --host 0.0.0.0" \
    ' > /start.sh && chmod +x /start.sh
@@ -105,5 +106,5 @@ RUN pip3 install --system \
    autopep8==1.5 \
    virtualenv==20.0.16
 
-EXPOSE 8080
+EXPOSE 8080 8081-8090
 ENTRYPOINT [ "/start.sh" ]
