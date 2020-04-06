@@ -47,7 +47,7 @@ USERSHELL=/usr/bin/fish
 ```
 ## Language Support
 
-As of right now, the following languages are supported:
+As of right now, the following languages and frameworks are supported:
 
 * C
 * C++
@@ -59,6 +59,7 @@ As of right now, the following languages are supported:
 * Erlang 22.3
 * Elixir 1.10
 * COBOL 2.2
+* Google Cloud SDK 287.0.0 (all components)
 
 Language versions can be set at build time via the `--build-arg` docker argument. For example:
 
@@ -73,3 +74,6 @@ Port 8080 is reserved for VSCode, but ports 8081-8090 are exposed in the default
 
 ### Why is fish shell the default shell?
 Because it's the shell I use, :)
+
+### This image is huge, why don't you prune x,y,z?
+This image is meant to be a fairly heavy weight image. The idea is to bootstrap a developer with most tools they'll need to get going.

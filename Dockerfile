@@ -38,6 +38,7 @@ ARG ERLANG_VERSION=22.3-1
 ARG ELIXIR_VERSION=1.10.2-1
 ARG JAVA_VERSION=14
 ARG RUST_VERSION=1.42.0
+ARG GCLOUD_VERSION=287.0.0
 ARG CODE_SERVER_VERSION=3.0.2
 
 WORKDIR /tmp
@@ -105,6 +106,16 @@ RUN wget -q -O /tmp/rust.tar.gz \
 RUN pip3 install --system \
    autopep8==1.5 \
    virtualenv==20.0.16
+
+# Install the Google Cloud SDK
+RUN wget -q -O /tmp/gcloud.tar.gz \
+   https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz && \
+   tar -xzf gcloud.tar.gz && \
+   mv google-cloud-sdk /usr/local/gcloud && \
+   /usr/local/gcloud/bin/gcloud -q components list --format "csv(id)" | \ 
+   grep -v '^id$' | xargs /usr/local/gcloud/bin/gcloud components install && \
+   rm /tmp/gcloud.tar.gz && \
+   find /usr/local/gcloud/bin -maxdepth 1 \( ! -name '*\.*' \) -type f -exec ln -s {} /usr/local/bin/ ';'
 
 EXPOSE 8080 8081-8090
 ENTRYPOINT [ "/start.sh" ]
