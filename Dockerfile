@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
    wget -nv https://download.opensuse.org/repositories/shells:fish:release:3/Debian_10/Release.key -O Release.key && \
    apt-key add - < Release.key && \
    apt-get update && apt-get install -y \
-   docker-ce docker-ce-cli containerd.io fish python3-pip gnucobol && \
+   docker-ce docker-ce-cli containerd.io fish python3-pip gnucobol redis-tools && \
    curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
    chmod +x /usr/local/bin/docker-compose && \
    rm -rf /var/cache/apt/archives/*
