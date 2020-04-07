@@ -27,6 +27,8 @@ RUN apt-get update && apt-get install -y \
    apt-key add - < Release.key && \
    apt-get update && apt-get install -y \
    docker-ce docker-ce-cli containerd.io fish python3-pip gnucobol && \
+   curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+   chmod +x /usr/local/bin/docker-compose && \
    rm -rf /var/cache/apt/archives/*
 
 ### Define your language versions here, or pass them in to build
