@@ -60,7 +60,7 @@ RUN echo \
    addgroup --quiet --gid ${PGID} ${USERNAME} \n\
    adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell ${USERSHELL} ${USERNAME} \n\
    adduser --quiet ${USERNAME} docker \n\
-   su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-ssh --auth none --host 0.0.0.0" \
+   su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-updates --disable-ssh --auth none --host 0.0.0.0" \
    ' > /start.sh && chmod +x /start.sh
 
 # Install node
