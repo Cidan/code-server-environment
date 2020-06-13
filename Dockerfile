@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
    curl \
    gnupg-agent \
    wget \
+   unzip \
    software-properties-common && \
    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - &&\
    add-apt-repository \
@@ -25,8 +26,10 @@ RUN apt-get update && apt-get install -y \
    echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_10/ /' > /etc/apt/sources.list.d/shells:fish:release:3.list && \
    wget -nv https://download.opensuse.org/repositories/shells:fish:release:3/Debian_10/Release.key -O Release.key && \
    apt-key add - < Release.key && \
+   curl https://bazel.build/bazel-release.pub.gpg | apt-key add - && \
+   echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
    apt-get update && apt-get install -y \
-   docker-ce docker-ce-cli containerd.io fish python3-pip gnucobol redis-tools && \
+   docker-ce docker-ce-cli containerd.io fish python3-pip gnucobol redis-tools bazel && \
    curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
    chmod +x /usr/local/bin/docker-compose && \
    rm -rf /var/cache/apt/archives/*
