@@ -14,5 +14,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     links:
       - redis
+      - spanner
   redis:
     image: "redis:5.0.8"
+  spanner:
+    image: "gcr.io/cloud-spanner-emulator/emulator"
