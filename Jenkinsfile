@@ -1,20 +1,11 @@
 pipeline {
   agent any
-  stages {
     stage('Build') {
-      steps {
-        script {
-          def customImage = docker.build("code-server:${env.BUILD_ID}")
-        }
-
-      }
+      def message = 'Hello, World!'
+ 
+      googleCloudBuild \
+        credentialsId: 'jinked-net',
+        source: local('src'),
+        request: file('Dockerfile'),
     }
-
-    stage('Deploy') {
-      steps {
-        echo 'Deploying....'
-      }
-    }
-
-  }
 }
