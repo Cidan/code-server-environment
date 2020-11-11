@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  stages{
     stage('Build') {
       def message = 'Hello, World!'
  
@@ -8,4 +9,5 @@ pipeline {
         source: local('src'),
         request: file('Dockerfile')
     }
+  }
 }
