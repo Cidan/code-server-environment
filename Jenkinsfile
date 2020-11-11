@@ -6,6 +6,6 @@ pipeline {
       googleCloudBuild \
         credentialsId: 'jinked-net',
         source: local('src'),
-        request: file('Dockerfile'),
+        request: file('Dockerfile')
     }
 }
