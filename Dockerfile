@@ -44,18 +44,16 @@ ARG ELIXIR_VERSION=1.10.2-1
 ARG JAVA_VERSION=14
 ARG RUST_VERSION=1.42.0
 ARG GCLOUD_VERSION=318.0.0
-ARG CODE_SERVER_VERSION=3.1.0
+ARG CODE_SERVER_VERSION=3.6.2
 
 WORKDIR /tmp
 
 # Install Code Server
 RUN wget -q -O /tmp/code-server.tar.gz \
-   https://github.com/cdr/code-server/releases/download/${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-linux-x86_64.tar.gz && \
-   tar -xzf code-server.tar.gz && mv /tmp/code-server-${CODE_SERVER_VERSION}-linux-x86_64 /usr/local/code-server && \
-   rm /usr/local/code-server/node /tmp/code-server.tar.gz && echo \
-   '#!/bin/bash \n\
-   /usr/local/bin/node /usr/local/code-server/out/node/entry.js $@' > /usr/local/bin/code-server && \
-   chmod +x /usr/local/bin/code-server
+   https://github.com/cdr/code-server/releases/download/v${CODE_SERVER_VERSION}/code-server-${CODE_SERVER_VERSION}-linux-amd64.tar.gz && \
+   tar -xzf code-server.tar.gz && mv /tmp/code-server-${CODE_SERVER_VERSION}-linux-amd64 /usr/local/code-server && \
+   rm /tmp/code-server.tar.gz && \
+   chmod +x /usr/local/code-server/bin/code-server
 
 # Setup our init
 RUN echo \
@@ -63,7 +61,7 @@ RUN echo \
    addgroup --quiet --gid ${PGID} ${USERNAME} \n\
    adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell ${USERSHELL} ${USERNAME} \n\
    adduser --quiet ${USERNAME} docker \n\
-   su - ${USERNAME} -c "/usr/local/bin/code-server --disable-telemetry --disable-updates --disable-ssh --auth none --host 0.0.0.0" \
+   su - ${USERNAME} -c "/usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8080" \
    ' > /start.sh && chmod +x /start.sh
 
 # Install node
