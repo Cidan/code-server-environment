@@ -6,6 +6,12 @@ name: aj-code
 steps:
 - name: package
   image: plugins/docker
+  username: cidan
+  password:
+    from_secret: github-registry-password
+  tags: latest
+  repo: ghcr.io/cidan
+  registry: ghcr.io
   when:
     event:
     - push
