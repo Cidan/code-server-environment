@@ -10,7 +10,7 @@ steps:
     username: cidan
     password:
       from_secret: github-registry-password
-    repo: cidan/code-server
+    repo: ghcr.io/cidan/code-server
     registry: ghcr.io
   when:
     event:
