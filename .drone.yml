@@ -9,7 +9,6 @@ steps:
   username: cidan
   password:
     from_secret: github-registry-password
-  tags: latest
   repo: ghcr.io/cidan/code-server
   registry: ghcr.io
   when:
