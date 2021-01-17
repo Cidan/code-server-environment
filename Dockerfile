@@ -61,6 +61,7 @@ RUN echo \
    addgroup --quiet --gid ${PGID} ${USERNAME} \n\
    adduser --quiet --disabled-password --gecos "" --uid ${PUID} --gid ${PGID} --shell ${USERSHELL} ${USERNAME} \n\
    adduser --quiet ${USERNAME} docker \n\
+   chown ${PUID}.{$PGID} -r /home/${USERNAME}
    su - ${USERNAME} -c "/usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8080" \
    ' > /start.sh && chmod +x /start.sh
 
