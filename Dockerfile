@@ -1,4 +1,4 @@
-FROM debian:10.3-slim
+FROM debian:10.8-slim
 
 ENV USERNAME=code
 ENV PUID=2000
