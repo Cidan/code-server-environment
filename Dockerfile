@@ -7,6 +7,12 @@ ENV USERSHELL=/usr/bin/fish
 
 ### Note: Language versions defined a bit below, so we don't have
 ### to regenerate this first run step.
+RUN echo \
+  'deb mirror://mirrors.ubuntu.com/mirrors.txt buster main restricted universe multiverse \n\
+   deb mirror://mirrors.ubuntu.com/mirrors.txt buster-updates main restricted universe multiverse \n\
+   deb mirror://mirrors.ubuntu.com/mirrors.txt buster-backports main restricted universe multiverse \n\
+   deb mirror://mirrors.ubuntu.com/mirrors.txt buster-security main restricted universe multiverse \n\
+  ' > /etc/apt/sources.list
 
 # Install some basic packages + docker
 RUN apt-get update && apt-get install -y \
