@@ -11,7 +11,6 @@ RUN echo \
   'deb http://ftp.us.debian.org/debian/ buster main restricted universe multiverse \n\
    deb http://ftp.us.debian.org/debian/ buster-updates main restricted universe multiverse \n\
    deb http://ftp.us.debian.org/debian/ buster-backports main restricted universe multiverse \n\
-   deb http://ftp.us.debian.org/debian/ buster-security main restricted universe multiverse \n\
   ' > /etc/apt/sources.list
 
 # Install some basic packages + docker
