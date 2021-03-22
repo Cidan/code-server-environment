@@ -35,8 +35,8 @@ RUN apt-get update && apt-get install -y \
    echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
    apt-get update && apt-get install -y \
    docker-ce docker-ce-cli containerd.io fish python3-pip gnucobol redis-tools bazel && \
-   wget -q -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" && \
-   chmod +x /usr/local/bin/docker-compose && \
+#   wget -q -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" && \
+#   chmod +x /usr/local/bin/docker-compose && \
    rm -rf /var/cache/apt/archives/*
 
 ### Define your language versions here, or pass them in to build
