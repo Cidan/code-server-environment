@@ -1,5 +1,5 @@
 #!/bin/bash
-export VERSION=1.16.2
+export VERSION=1.16.6
 
 rm -rf /home/${USER}/.apps/go
 mkdir -p /home/${USER}/.apps
