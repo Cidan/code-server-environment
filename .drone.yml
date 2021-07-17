@@ -15,13 +15,3 @@ steps:
   when:
     event:
     - push
-#- name: deploy
-#  image: google/cloud-sdk:latest
-#  commands:
-#  - kubectl set image statefulset/lilbot lilbot=us-west2-docker.pkg.dev/jinked-net/lilbot/lilbot:${DRONE_COMMIT_SHA}
-#  - kubectl rollout status statefulset/lilbot
-#  when:
-#    event:
-#    - promote
-#    target:
-#    - production
