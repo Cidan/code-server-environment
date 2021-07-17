@@ -61,7 +61,7 @@ RUN echo \
    if [ ! -f /home/${USERNAME}/.ssh/id_rsa ]; then \n\
      ssh-keygen -b 4096 -t RSA -N "" -f /home/${USERNAME}/.ssh/id_rsa \n\
    fi \n\
-   chown ${PUID}.${PGID} -R /home/${USERNAME} \n\
+   chown ${PUID}.${PGID} /home/${USERNAME} \n\
    su - ${USERNAME} -c "/usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:3456" \
    ' > /start.sh && chmod +x /start.sh
 
