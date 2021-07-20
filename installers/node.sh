@@ -1,5 +1,5 @@
 #!/bin/bash
-export VERSION=12.18.3
+export VERSION=14.17.3
 
 rm -rf /home/${USER}/.apps/node
 mkdir -p /home/${USER}/.apps
