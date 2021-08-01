@@ -63,7 +63,7 @@ RUN echo \
      ssh-keygen -b 4096 -t RSA -N "" -f /home/${USERNAME}/.ssh/id_rsa \n\
    fi \n\
    chown ${PUID}.${PGID} /home/${USERNAME} \n\
-   su - ${USERNAME} -c "export export SERVICE_URL=https://open-vsx.org/vscode/gallery && export ITEM_URL=https://open-vsx.org/vscode/item && /usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8080" \
+   su - ${USERNAME} -c "export export SERVICE_URL=https://marketplace.visualstudio.com/_apis/public/gallery && export ITEM_URL=https://marketplace.visualstudio.com/items && /usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8080" \
    ' > /start.sh && chmod +x /start.sh
 
 # Install Erlang
