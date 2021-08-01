@@ -63,6 +63,8 @@ RUN echo \
      ssh-keygen -b 4096 -t RSA -N "" -f /home/${USERNAME}/.ssh/id_rsa \n\
    fi \n\
    chown ${PUID}.${PGID} /home/${USERNAME} \n\
+   export SERVICE_URL=https://open-vsx.org/vscode/gallery \n\
+   export ITEM_URL=https://open-vsx.org/vscode/item \n\
    su - ${USERNAME} -c "/usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8080" \
    ' > /start.sh && chmod +x /start.sh
 
