@@ -13,5 +13,5 @@ wget -q -O /tmp/app.zip \
    https://github.com/protocolbuffers/protobuf/releases/download/v${VERSION}/protoc-${VERSION}-linux-x86_64.zip && \
    unzip app.zip && \
    mv bin/protoc /home/${USER}/.local/bin/ && \
-   mv include/google /home/${USER}/.local/include/ && \
+   mv include/* /home/${USER}/.local/include/ && \
    rm -rf /tmp/bin /tmp/include /tmp/app.zip /tmp/readme.txt
