@@ -64,7 +64,7 @@ RUN echo \
      ssh-keygen -b 4096 -t RSA -N "" -f /home/${USERNAME}/.ssh/id_rsa \n\
    fi \n\
    chown ${PUID}.${PGID} /home/${USERNAME} \n\
-   su - ${USERNAME} -c "export export SERVICE_URL=https://marketplace.visualstudio.com/_apis/public/gallery && export ITEM_URL=https://marketplace.visualstudio.com/items && /usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8080" \
+   su - ${USERNAME} -c "export export SERVICE_URL=https://marketplace.visualstudio.com/_apis/public/gallery && export ITEM_URL=https://marketplace.visualstudio.com/items && /usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8472" \
    ' > /start.sh && chmod +x /start.sh
 
 # Install Erlang
@@ -92,5 +92,5 @@ RUN pip3 install --system \
    autopep8==1.5 \
    virtualenv==20.0.16
 
-EXPOSE 8080 8081-8090
+EXPOSE 8472 8081-8090
 ENTRYPOINT [ "/start.sh" ]
