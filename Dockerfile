@@ -53,6 +53,10 @@ RUN wget -q -O /tmp/code-server.tar.gz \
    rm /tmp/code-server.tar.gz && \
    chmod +x /usr/local/code-server/bin/code-server
 
+# Setup sysctl limits
+RUN  echo \
+   'fs.inotify.max_user_watches=524288' >> /etc/sysctl.conf
+
 # Setup our init
 RUN echo \
    '#!/bin/bash \n\
