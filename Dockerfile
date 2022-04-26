@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
 ARG ERLANG_VERSION=22.3-1
 ARG ELIXIR_VERSION=1.10.2-1
 ARG RUST_VERSION=1.50.0
-ARG CODE_SERVER_VERSION=3.11.0
+ARG CODE_SERVER_VERSION=4.3.0
 
 WORKDIR /tmp
 
@@ -68,7 +68,7 @@ RUN echo \
      ssh-keygen -b 4096 -t RSA -N "" -f /home/${USERNAME}/.ssh/id_rsa \n\
    fi \n\
    chown ${PUID}.${PGID} /home/${USERNAME} \n\
-   su - ${USERNAME} -c "export export SERVICE_URL=https://marketplace.visualstudio.com/_apis/public/gallery && export ITEM_URL=https://marketplace.visualstudio.com/items && /usr/local/code-server/bin/code-server --disable-telemetry --auth none --bind-addr 0.0.0.0:8472" \
+   su - ${USERNAME} -c "export export SERVICE_URL=https://marketplace.visualstudio.com/_apis/public/gallery && export ITEM_URL=https://marketplace.visualstudio.com/items && /usr/local/code-server/bin/code-server --disable-telemetry --disable-file-downloads --auth none --bind-addr 0.0.0.0:8472" \
    ' > /start.sh && chmod +x /start.sh
 
 # Install Erlang
