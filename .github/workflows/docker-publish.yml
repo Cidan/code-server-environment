@@ -79,9 +79,9 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-      permissions:
-        contents: read
-        packages: read
+    permissions:
+      contents: read
+      packages: read
     steps:
       - name: Deploy
         uses: actions-hub/kubectl@master
