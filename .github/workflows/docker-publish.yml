@@ -1,4 +1,4 @@
-name: Docker
+name: Build And Deploy
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -76,10 +76,16 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      
+
+  deploy:
+    runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        packages: read
+    steps:
       - name: Deploy
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: kubectl set image statefulset/aj-code aj-code=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${GITHUB_SHA::6}
+          args: set image statefulset/aj-code aj-code=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${GITHUB_SHA::6}
