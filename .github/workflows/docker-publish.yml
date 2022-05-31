@@ -33,6 +33,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -67,4 +79,4 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: kubectl set image statefulset/aj-code aj-code=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          args: kubectl set image statefulset/aj-code aj-code=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}${{ GITHUB_SHA }}
