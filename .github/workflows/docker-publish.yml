@@ -82,10 +82,11 @@ jobs:
     permissions:
       contents: read
       packages: read
+    needs: build
     steps:
       - name: Deploy
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: set image statefulset/aj-code aj-code=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${GITHUB_SHA::6}
+          args: set image statefulset/aj-code aj-code=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{github.sha}}
