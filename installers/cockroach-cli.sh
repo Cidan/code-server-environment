@@ -1,5 +1,5 @@
 #!/bin/bash
-export COCKROACH_VERSION=21.1.5
+export COCKROACH_VERSION=22.1.0
 
 rm -rf /home/${USER}/.apps/cdb
 mkdir -p /home/${USER}/.apps
