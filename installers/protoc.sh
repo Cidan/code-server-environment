@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export VERSION=3.13.0
+export VERSION=21.0
 
 rm -rf /home/${USER}/.local/include/google
 mkdir -p /home/${USER}/.apps

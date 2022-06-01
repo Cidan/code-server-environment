@@ -1,5 +1,5 @@
 #!/bin/bash
-export VERSION=0.15.0
+export VERSION=1.2.1
 mkdir -p /home/${USER}/.local/bin
 mkdir -p /home/${USER}/.apps
 cd /tmp
