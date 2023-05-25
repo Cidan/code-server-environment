@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BIN="/home/${USER}/.local/bin" && \
-VERSION="1.12.0" && \
+VERSION="1.19.0" && \
 BINARY_NAME="buf" && \
   curl -sSL \
     "https://github.com/bufbuild/buf/releases/download/v${VERSION}/${BINARY_NAME}-$(uname -s)-$(uname -m)" \
