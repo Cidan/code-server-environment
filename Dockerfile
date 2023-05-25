@@ -66,6 +66,7 @@ RUN echo \
    mkdir -p /home/${USERNAME}/.ssh \n\
    if [ ! -f /home/${USERNAME}/.ssh/id_rsa ]; then \n\
      ssh-keygen -b 4096 -t RSA -N "" -f /home/${USERNAME}/.ssh/id_rsa \n\
+     chown ${PUID}:${PGID}-R /home/${USERNAME}/.ssh \n\
    fi \n\
    chown ${PUID}.${PGID} /home/${USERNAME} \n\
    su - ${USERNAME} -c "export export SERVICE_URL=https://marketplace.visualstudio.com/_apis/public/gallery && export ITEM_URL=https://marketplace.visualstudio.com/items && /usr/local/code-server/bin/code-server --disable-telemetry --disable-file-downloads --auth none --bind-addr 0.0.0.0:8472" \
