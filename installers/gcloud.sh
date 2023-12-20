@@ -1,5 +1,5 @@
 #!/bin/bash
-export GCLOUD_VERSION=332.0.0
+export GCLOUD_VERSION=457.0.0
 rm -rf /home/${USER}/.apps/gcloud
 mkdir -p /home/${USER}/.local/bin
 mkdir -p /home/${USER}/.apps
