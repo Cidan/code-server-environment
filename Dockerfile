@@ -29,13 +29,13 @@ RUN apt-get update && apt-get install -y \
    "deb [arch=amd64] https://download.docker.com/linux/debian \
    $(lsb_release -cs) \
    stable" && \
-   echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_10/ /' > /etc/apt/sources.list.d/shells:fish:release:3.list && \
-   wget -nv https://download.opensuse.org/repositories/shells:fish:release:3/Debian_10/Release.key -O Release.key && \
+   echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_12/ /' > /etc/apt/sources.list.d/shells:fish:release:3.list && \
+   wget -nv https://download.opensuse.org/repositories/shells:fish:release:3/Debian_12/Release.key -O Release.key && \
    apt-key add - < Release.key && \
    curl https://bazel.build/bazel-release.pub.gpg | apt-key add - && \
    echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
    apt-get update && apt-get install -y \
-   docker-ce docker-ce-cli containerd.io fish python3-pip gnucobol redis-tools bazel && \
+   docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin fish python3-pip gnucobol redis-tools bazel && \
    rm -rf /var/cache/apt/archives/*
 
 
