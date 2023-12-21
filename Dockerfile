@@ -94,7 +94,7 @@ RUN echo \
 #   rm /tmp/rust.tar.gz
 
 # Install python3 libraries
-RUN pip3 install --system \
+RUN pip3 install \
    autopep8==1.5 \
    virtualenv==20.0.16
 
