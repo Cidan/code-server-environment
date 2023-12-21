@@ -24,11 +24,12 @@ RUN apt-get update && apt-get install -y \
    lua5.3 \
    default-mysql-client \
    software-properties-common && \
-   curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - &&\
-   add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/debian \
-   $(lsb_release -cs) \
-   stable" && \
+   curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+   chmod a+r /etc/apt/keyrings/docker.gpg && \
+   echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null && \
    echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_12/ /' > /etc/apt/sources.list.d/shells:fish:release:3.list && \
    wget -nv https://download.opensuse.org/repositories/shells:fish:release:3/Debian_12/Release.key -O Release.key && \
    apt-key add - < Release.key && \
