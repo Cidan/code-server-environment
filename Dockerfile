@@ -1,15 +1,15 @@
-FROM debian:10.8-slim
+FROM debian:12.4-slim
 
 ENV USERNAME=code
 ENV PUID=2000
 ENV PGID=2000
 ENV USERSHELL=/usr/bin/fish
 
-RUN echo \
-  'deb http://ftp.us.debian.org/debian/ buster main restricted universe multiverse \n\
-   deb http://ftp.us.debian.org/debian/ buster-updates main restricted universe multiverse \n\
-   deb http://ftp.us.debian.org/debian/ buster-backports main restricted universe multiverse \n\
-  ' > /etc/apt/sources.list
+#RUN echo \
+#  'deb http://ftp.us.debian.org/debian/ buster main restricted universe multiverse \n\
+#   deb http://ftp.us.debian.org/debian/ buster-updates main restricted universe multiverse \n\
+#   deb http://ftp.us.debian.org/debian/ buster-backports main restricted universe multiverse \n\
+#  ' > /etc/apt/sources.list
 
 # Install some basic packages + docker
 RUN apt-get update && apt-get install -y \
