@@ -93,10 +93,5 @@ RUN echo \
 #   ln -s /usr/local/rust/*/bin/* /usr/local/bin/ && \
 #   rm /tmp/rust.tar.gz
 
-# Install python3 libraries
-RUN pip3 install \
-   autopep8==1.5 \
-   virtualenv==20.0.16
-
 EXPOSE 8472 8081-8090
 ENTRYPOINT [ "/start.sh" ]
